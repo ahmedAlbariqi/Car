@@ -4,87 +4,124 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>متجر قطع السيارات</title>
-  <!-- مكتبة الأيقونات -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body {
       margin: 0;
       font-family: 'Cairo', sans-serif;
-      background-color: #f9f9f9;
-      direction: rtl;
+      background-color: #f9fafb;
+      color: #1f2937;
     }
 
-    h1, h2, h3 {
-      margin: 0 0 15px;
-      color: #222;
+    a {
+      text-decoration: none;
     }
 
     .main-header {
-      background-color: #ffffff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      padding: 10px 20px;
+      background-color: white;
+      padding: 20px 30px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
-      z-index: 999;
+      z-index: 1000;
     }
 
     .logo {
       font-size: 24px;
       font-weight: bold;
-      color: #007bff;
+      color: #6366f1;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      position: relative;
     }
 
     .nav-links {
-      display: flex;
-      gap: 20px;
       list-style: none;
+      display: flex;
+      gap: 25px;
     }
 
     .nav-links a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
+      color: #374151;
+      font-weight: 600;
     }
 
     .nav-links a:hover {
-      color: #007bff;
+      color: #6366f1;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #374151;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        width: max-content;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+        margin-right: 10px;
+      }
     }
 
     .hero {
       text-align: center;
-      background: linear-gradient(90deg, #fefefe, #f4f6ff);
-      padding: 50px 20px;
+      padding: 60px 20px;
+      background: linear-gradient(90deg, #eef2ff, #f9fafb);
+    }
+
+    .hero h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: #6b7280;
+    }
+
+    .search-filters {
+      margin-top: 20px;
     }
 
     .search-filters select {
       padding: 10px;
       margin: 5px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      background: white;
       min-width: 140px;
     }
 
-    .whatsapp-banner {
-      margin: 30px 0;
-      text-align: center;
-      background-color: #e1f5e4;
-      padding: 15px;
-      border-radius: 12px;
-    }
-
-    .whatsapp-banner i {
-      font-size: 40px;
-      color: #25d366;
-      margin-bottom: 10px;
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 20px;
     }
 
     .products-grid {
@@ -95,38 +132,58 @@
 
     .product-card {
       background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      text-align: center;
       padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
     }
 
     .product-card i {
       font-size: 60px;
-      color: #007bff;
+      color: #6366f1;
       margin-bottom: 15px;
     }
 
-    .price {
-      display: block;
+    .product-card h3 {
       font-size: 18px;
-      color: #007bff;
+      margin-bottom: 8px;
+    }
+
+    .product-card p {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .price {
+      font-size: 16px;
+      color: #10b981;
       font-weight: bold;
       margin: 10px 0;
     }
 
     button {
-      background-color: #28a745;
+      background-color: #6366f1;
       color: white;
-      padding: 10px 20px;
       border: none;
+      padding: 10px 20px;
       border-radius: 25px;
       cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #4f46e5;
     }
 
     .brands {
       text-align: center;
-      padding: 40px 10px;
+      margin: 60px 0 30px;
     }
 
     .brand-logos {
@@ -139,32 +196,11 @@
 
     .brand-logos i {
       font-size: 36px;
-      color: #444;
-    }
-
-    .blog-grid {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-
-    .blog-post {
-      background-color: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      padding: 20px;
-    }
-
-    .blog-post i {
-      font-size: 48px;
-      color: #007bff;
-      margin-bottom: 10px;
+      color: #6b7280;
     }
 
     .main-footer {
-      background-color: #1e272e;
+      background-color: #111827;
       color: white;
       text-align: center;
       padding: 25px 10px;
@@ -174,96 +210,76 @@
 </head>
 <body>
 
-  <!-- رأس الصفحة -->
-  <header class="main-header">
-    <div class="logo"><i class="fas fa-car"></i> AutoParts</div>
+<header class="main-header">
+  <div class="logo"><i class="fas fa-car"></i> AutoParts</div>
+  <nav class="nav-container">
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
     <ul class="nav-links">
       <li><a href="#">الرئيسية</a></li>
       <li><a href="#">المنتجات</a></li>
       <li><a href="#">العروض</a></li>
       <li><a href="#">اتصل بنا</a></li>
     </ul>
-  </header>
+  </nav>
+</header>
 
-  <!-- بانر -->
-  <section class="hero">
-    <h1>قطع سيارتك .. لباب بيتك</h1>
-    <p>متجر إلكتروني مختص ببيع قطع غيار السيارات</p>
-    <div class="search-filters">
-      <select><option>مصنع السيارة</option></select>
-      <select><option>موديل السيارة</option></select>
-      <select><option>سنة الصنع</option></select>
-    </div>
-  </section>
-
-  <!-- بانر واتساب -->
-  <div class="whatsapp-banner">
-    <i class="fab fa-whatsapp"></i>
-    <p>في حال لم تجد قطع سيارتك .. <strong>تواصل معنا</strong></p>
+<section class="hero">
+  <h1>قطع سيارتك .. لباب بيتك</h1>
+  <p>متجر إلكتروني مختص ببيع قطع غيار السيارات</p>
+  <div class="search-filters">
+    <select><option>مصنع السيارة</option></select>
+    <select><option>موديل السيارة</option></select>
+    <select><option>سنة الصنع</option></select>
   </div>
+</section>
 
-  <!-- المنتجات -->
-  <section class="container">
-    <h2>قطع رائجة</h2>
-    <div class="products-grid">
-      <div class="product-card">
-        <i class="fas fa-filter"></i>
-        <h3>مجموعة فلاتر</h3>
-        <p>مازدا - تويوتا - هونداي</p>
-        <span class="price">180 ر.س</span>
-        <button onclick="addToCart('مجموعة فلاتر', 180)">أضف للسلة</button>
-      </div>
-      <div class="product-card">
-        <i class="fas fa-oil-can"></i>
-        <h3>زيوت محركات</h3>
-        <p>Mobil 1 - ACDelco</p>
-        <span class="price">90 ر.س</span>
-        <button onclick="addToCart('زيوت محركات', 90)">أضف للسلة</button>
-      </div>
+<section class="container">
+  <h2>قطع رائجة</h2>
+  <div class="products-grid">
+    <div class="product-card">
+      <i class="fas fa-filter"></i>
+      <h3>مجموعة فلاتر</h3>
+      <p>تويوتا - هونداي - مازدا</p>
+      <span class="price">180 ر.س</span>
+      <button onclick="addToCart('مجموعة فلاتر', 180)">أضف للسلة</button>
     </div>
-  </section>
-
-  <!-- البراندات -->
-  <section class="brands">
-    <h2>تعرف على البراندات</h2>
-    <div class="brand-logos">
-      <i class="fab fa-hyundai" title="هونداي"></i>
-      <i class="fab fa-ford" title="فورد"></i>
-      <i class="fas fa-car-side" title="تويوتا"></i>
-      <i class="fas fa-truck" title="GMC"></i>
-      <i class="fas fa-car" title="نيسان"></i>
+    <div class="product-card">
+      <i class="fas fa-oil-can"></i>
+      <h3>زيوت محركات</h3>
+      <p>Mobil 1 - ACDelco</p>
+      <span class="price">90 ر.س</span>
+      <button onclick="addToCart('زيوت محركات', 90)">أضف للسلة</button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- المدونة -->
-  <section class="container">
-    <h2>أحدث المواضيع</h2>
-    <div class="blog-grid">
-      <div class="blog-post">
-        <i class="fas fa-tint-slash"></i>
-        <p>السوائل والزيوت التي قد تتسرب من السيارة</p>
-      </div>
-      <div class="blog-post">
-        <i class="fas fa-box"></i>
-        <p>وصلتنا قطع شنجان الجديدة</p>
-      </div>
-      <div class="blog-post">
-        <i class="fas fa-water"></i>
-        <p>مضخة الماء في السيارة – وظيفتها وأعراض تلفها</p>
-      </div>
-    </div>
-  </section>
+<section class="brands">
+  <h2>تعرف على البراندات</h2>
+  <div class="brand-logos">
+    <i class="fab fa-hyundai"></i>
+    <i class="fab fa-ford"></i>
+    <i class="fas fa-car-side"></i>
+    <i class="fas fa-truck"></i>
+    <i class="fas fa-car"></i>
+  </div>
+</section>
 
-  <!-- التذييل -->
-  <footer class="main-footer">
-    جميع الحقوق محفوظة &copy; 2025 متجر قطع السيارات
-  </footer>
+<footer class="main-footer">
+  جميع الحقوق محفوظة &copy; 2025 متجر قطع السيارات
+</footer>
 
-  <!-- JavaScript -->
-  <script>
-    function addToCart(name, price) {
-      alert(`تمت إضافة "${name}" إلى السلة بسعر ${price} ر.س`);
-    }
-  </script>
+<script>
+  function toggleMenu() {
+    const nav = document.querySelector(".nav-links");
+    nav.classList.toggle("show");
+  }
+
+  function addToCart(name, price) {
+    alert(`تمت إضافة \"${name}\" إلى السلة بسعر ${price} ر.س`);
+  }
+</script>
+
 </body>
 </html>
